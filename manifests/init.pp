@@ -3,6 +3,8 @@ class ruby_build(
   $source_root = '/opt/puppet_staging/sources'
 ) {
 
+  require 'git'
+
   # Pull down and install a tool to build our dev version of Ruby
   vcsrepo { 'ruby-build':
     path     => "${sources_root}/ruby-build",
