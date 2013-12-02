@@ -7,7 +7,7 @@ class ruby_build(
 
   # Pull down and install a tool to build our dev version of Ruby
   vcsrepo { 'ruby-build':
-    path     => "${sources_root}/ruby-build",
+    path     => "${source_root}/ruby-build",
     ensure   => 'present',
     provider => 'git',
     source   => 'git://github.com/sstephenson/ruby-build.git',
@@ -16,8 +16,8 @@ class ruby_build(
   }
 
   exec { 'install ruby-build':
-    cwd         => "${sources_root}/ruby-build",
-    command     => "${sources_root}/ruby-build/install.sh",
+    cwd         => "${source_root}/ruby-build",
+    command     => "${source_root}/ruby-build/install.sh",
     creates     => '/usr/local/share/ruby-build',
     subscribe   => Vcsrepo['ruby-build'],
   }
