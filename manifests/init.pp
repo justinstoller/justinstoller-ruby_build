@@ -1,5 +1,5 @@
 class ruby_build(
-  $version     = 'v20130923',
+  $version     = 'v20131122.1',
   $source_root = '/opt/puppet_staging/sources'
 ) {
 
