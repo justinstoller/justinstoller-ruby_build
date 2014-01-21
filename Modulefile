@@ -7,5 +7,6 @@ summary 'Installs ruby-build and Rubies with it'
 description 'Installs ruby-build and Rubies with it using VCSRepo'
 project_page 'https://github.com/justinstoller/puppet-ruby_build'
 
-dependency 'puppetlabs-git'
-dependency 'puppetlabs-staging'
+dependency 'puppetlabs/git'
+dependency 'nanliu/staging'
+dependency 'puppetlabs/vcsrepo'

@@ -1,0 +1,10 @@
+.DS_Store
+**/*.swp
+.bundle
+.librarian
+.tmp
+.vagrant
+results_spec.xml
+modules
+wiki
+
