@@ -1,0 +1,12 @@
+FORGE
+  remote: https://forge.puppetlabs.com
+  specs:
+    nanliu/staging (0.3.1)
+    puppetlabs/git (0.0.3)
+    puppetlabs/vcsrepo (0.2.0)
+
+DEPENDENCIES
+  nanliu/staging (>= 0)
+  puppetlabs/git (>= 0)
+  puppetlabs/vcsrepo (>= 0)
+
