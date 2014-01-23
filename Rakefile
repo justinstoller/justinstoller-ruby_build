@@ -15,9 +15,9 @@ namespace :ci do
   end
 
   desc 'Lint Puppet style with puppet-lint formatted for Jenkins'
-  task :style do
+  task :lint do
     ENV['LINT_FORMAT'] = '%{path}:%{linenumber}:%{check}:%{KIND}:%{message}'
-    Rake::Task['lint:style'].invoke
+    Rake::Task['lint'].invoke
   end
 
 end
