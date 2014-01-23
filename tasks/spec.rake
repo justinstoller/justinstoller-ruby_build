@@ -1,6 +1,6 @@
 
 desc 'Run all tests'
-task :spec => %w{spec:unit}
+task :spec => %w{spec:unit spec:system}
 
 namespace :spec do
   desc 'Run rspec-puppet'

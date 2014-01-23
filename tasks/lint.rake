@@ -132,6 +132,8 @@ namespace :lint do
 
       if ENV['LINT_FORMAT']
         PuppetLint.configuration.log_format = ENV['LINT_FORMAT']
+      else
+        PuppetLint.configuration.with_filename = true
       end
 
       (ENV['DISABLE_CHECKS'] || '').split(' ').each do |check|
