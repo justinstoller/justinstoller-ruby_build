@@ -1,14 +1,15 @@
 class ruby_build(
-  $version     = '458d3331675f9f35517cfb095489496eff785aa3',
-  $source_root = '/opt/puppet_staging/sources'
+  $version     = '9cd77be141e066b968b4a7e72d0628c671e067e4',
+  $source_root = '/opt/puppet_staging/sources',
+  $prefix      = '/usr/local'
 ) {
 
   require 'git'
 
   # Pull down and install a tool to build our dev version of Ruby
   vcsrepo { 'ruby-build':
-    path     => "${source_root}/ruby-build",
     ensure   => 'present',
+    path     => "${source_root}/ruby-build",
     provider => 'git',
     source   => 'git://github.com/sstephenson/ruby-build.git',
     revision => $version,
@@ -18,7 +19,8 @@ class ruby_build(
   exec { 'install ruby-build':
     cwd         => "${source_root}/ruby-build",
     command     => "${source_root}/ruby-build/install.sh",
-    creates     => '/usr/local/share/ruby-build',
+    environment => "PREFIX=${prefix}",
+    creates     => "${prefix}/share/ruby-build",
     subscribe   => Vcsrepo['ruby-build'],
   }
 }

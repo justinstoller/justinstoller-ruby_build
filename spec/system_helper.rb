@@ -7,8 +7,8 @@ modname    = File.basename(ROOT).split('-', 2).pop
 hosts      = ENV['SYSTEM_HOSTS'] || 'default'
 hosts_file = File.join(support, 'hosts', hosts + '.yml')
 
-destroy   = ENV['SPEC_DESTROY'] == 'true'   ? ''                                 : '--preserve-hosts'
-provis    = ENV['SPEC_PROVISION'] == 'true' ? ''                                 : '--no-provision'
+destroy   = ENV['SPEC_DESTROY'] == 'true'   ? '' : '--preserve-hosts'
+provis    = ENV['SPEC_PROVISION'] == 'true' ? '' : '--no-provision'
 keyfile   = ENV['SPEC_KEYFILE']             ? ['--keyfile', ENV['SPEC_KEYFILE']] : ['--keyfile', File.join(support, 'insecure_private_key')]
 debug     = ENV['SPEC_DEBUG']               ? ['--log-level', 'debug']           : []
 
@@ -49,13 +49,14 @@ RSpec.configure do |c|
 
     # prepare our env for the test suite
     c.hosts.each do |host|
-      on host, 'yum install -y git'
-
       mod_on_host = "#{host['distmoduledir']}/#{modname}"
+      on( host, "mkdir -p #{mod_on_host}" )
 
       on( host, 'gem install rake bundler --no-ri --no-rdoc' )
       on( host, "mkdir -p #{mod_on_host}" )
-      %w{manifests templates files Puppetfile tasks Rakefile Gemfile}.each do |to_trans|
+      %w{Modulefile manifests templates files
+         Puppetfile Gemfile
+         tasks Rakefile}.each do |to_trans|
 
         local_file = File.join(ROOT, to_trans)
 
@@ -64,11 +65,11 @@ RSpec.configure do |c|
         end
       end
 
+      on( host, "puppet apply #{mod_on_host}/manifests/prerequisites/dev.pp")
       on( host,
           "cd #{mod_on_host}; " +
-          "LIBRARIAN_PUPPET_PATH=#{host['distmoduledir']} " +
           "BUNDLE_WITHOUT='ci lint spec pkg' rake deps:ruby; " +
-          "rake deps:puppet")
+          "LIBRARIAN_PUPPET_PATH=#{host['distmoduledir']} rake deps:puppet")
     end
   end
 
