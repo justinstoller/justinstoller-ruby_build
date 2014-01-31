@@ -1,5 +1,5 @@
 desc 'Clean all dependencies and artifacts'
-task :clean => %w{clean:pkg clean:ruby clean:puppet}
+task :clean => %w{clean:pkg clean:ruby clean:puppet clean:spec}
 
 namespace :clean do
   desc 'Clean the module build dir'
@@ -30,6 +30,15 @@ namespace :clean do
     FileUtils.rm_rf(File.join(ROOT, '.librarian'))
     FileUtils.rm_rf(File.join(ROOT, '.tmp'))
     FileUtils.rm_rf(File.join(ROOT, 'Puppetfile.lock'))
+    puts '...ok'
+  end
+
+  desc 'Clean the test artifacts'
+  task :spec do
+    require 'fileutils'
+
+    printf( '%-60s', 'Removing vagrant boxes if any...' )
+    FileUtils.rm_rf(File.join(ROOT, '.vagrant'))
     puts '...ok'
   end
 end

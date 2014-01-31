@@ -83,9 +83,12 @@ RAKE_HELP = <<RAKE_HELP_EOS
             ```
 
       * For help with Rake see:
-          ....
+          http://www.stuartellis.eu/articles/rake/
 
-      * For general help with Ruby see:
-          ....
+      * For general help with Ruby honestly try StackOverflow,
+          review the core and stdlib API's at: http://ruby-doc.org/,
+          gem API docs at http://rdoc.info/ or if you want a book
+          the best survey of Ruby is still probably the Pickaxe:
+          http://pragprog.com/book/ruby4/programming-ruby-1-9-2-0
 
 RAKE_HELP_EOS
