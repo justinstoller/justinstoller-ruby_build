@@ -1,5 +1,5 @@
 name    'justinstoller/ruby_build'
-version '0.0.1'
+version '0.1.0'
 source 'https://github.com/justinstoller/puppet-ruby_build'
 author 'justinstoller'
 license 'Apache License, Version 2.0'
