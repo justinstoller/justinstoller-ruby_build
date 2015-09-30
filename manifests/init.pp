@@ -16,6 +16,12 @@ class ruby_build(
     require  =>  Class['git'],
   }
 
+  file { [ "${prefix}/share/ruby-build", "${prefix}/bin/ruby-build" ]:
+    ensure => absent,
+    force  => true,
+    before => Exec['install ruby-build'],
+  }
+
   exec { 'install ruby-build':
     cwd         => "${source_root}/ruby-build",
     command     => "${source_root}/ruby-build/install.sh",
