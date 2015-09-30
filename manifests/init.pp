@@ -4,7 +4,13 @@ class ruby_build(
   $prefix      = '/usr/local'
 ) {
 
-  require 'git'
+  if ( $::osfamily == 'Darwin' ) {
+    $git_manage = false
+  } else {
+    $git_manage = true
+  }
+  class { 'git': package_manage => $git_manage, }
+  contain 'git'
 
   # Pull down and install a tool to build our dev version of Ruby
   vcsrepo { 'ruby-build':
