@@ -1,8 +1,9 @@
 class ruby_build(
   $version     = '9cd77be141e066b968b4a7e72d0628c671e067e4',
   $source_root = '/opt/puppet_staging/sources',
-  $prefix      = '/usr/local'
-) {
+  $prefix      = '/usr/local',
+  $dev_packages = $ruby_build::params::dev_packages,
+) inherits ruby_build::params {
 
   if ( $::osfamily == 'Darwin' ) {
     $git_manage = false
@@ -11,6 +12,7 @@ class ruby_build(
   }
   class { 'git': package_manage => $git_manage, }
   contain 'git'
+  ensure_packages($dev_packages)
 
   # Pull down and install a tool to build our dev version of Ruby
   vcsrepo { 'ruby-build':
